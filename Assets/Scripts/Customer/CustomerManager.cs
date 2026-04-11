@@ -48,67 +48,88 @@ public class CustomerManager : MonoBehaviour
     // ─────────────────── RecipeQueueManager 연동 ───────────────────
 
     /// <summary>
-    /// 레시피 카드가 화면에 등장할 때 RecipeQueueManager에서 호출합니다.
-    /// 왼쪽부터 빈 슬롯을 찾아 손님을 생성하고 등장 애니메이션을 시작합니다.
+    /// 레시피 카드가 스폰될 때 RecipeQueueManager에서 호출합니다.
+    /// [순서] 손님 등장 → 등장 완료 콜백 → 말풍선 표시 → onReady 콜백
+    /// onReady 콜백 안에서 레시피 카드를 스폰하면 됩니다.
     /// </summary>
-    public void OnRecipeSpawned(RecipeUI card)
+    /// <param name="card">연결될 RecipeUI</param>
+    /// <param name="foodSprite">말풍선에 표시할 음식 스프라이트</param>
+    /// <param name="onReady">손님 등장 + 말풍선 표시 완료 후 호출되는 콜백</param>
+    public void OnRecipeSpawned(RecipeUI card, Sprite foodSprite, System.Action onReady)
     {
-        if (card == null || customerPrefab == null) return;
-        if (slotTransforms == null || slotTransforms.Length == 0) return;
+        if (card == null || customerPrefab == null) { onReady?.Invoke(); return; }
+        if (slotTransforms == null || slotTransforms.Length == 0) { onReady?.Invoke(); return; }
 
         int slotIndex = FindEmptySlot();
         if (slotIndex < 0)
         {
-            Debug.Log("[CustomerManager] 빈 슬롯이 없어 손님을 생성하지 않음");
+            // 빈 슬롯이 없으면 손님 없이 콜백만 즉시 호출
+            onReady?.Invoke();
             return;
         }
 
-        // 손님 프리팹 생성
         GameObject obj = Instantiate(customerPrefab);
         Customer customer = obj.GetComponent<Customer>();
         if (customer == null)
         {
             Destroy(obj);
-            Debug.LogError("[CustomerManager] customerPrefab에 Customer 컴포넌트가 없습니다!");
+            onReady?.Invoke();
             return;
         }
 
-        // 랜덤 스프라이트 선택
+        // 랜덤 손님 스프라이트
         Sprite sprite = null;
         if (customerSprites != null && customerSprites.Length > 0)
             sprite = customerSprites[UnityEngine.Random.Range(0, customerSprites.Length)];
 
-        // 초기화 및 등장 애니메이션 시작
         Vector3 worldPos = slotTransforms[slotIndex].position;
-        customer.Initialize(slotIndex, worldPos, card, sprite);
+        customer.Initialize(slotIndex, worldPos, card, sprite, foodSprite);
 
         slots[slotIndex] = customer;
         cardToCustomer[card] = customer;
+
+        // 등장 완료 콜백: 말풍선 팝업 + 레시피 카드 슬라이드 인을 동시에 시작
+        customer.OnAppearComplete += () =>
+        {
+            customer.ShowBubble();
+            onReady?.Invoke(); // 딜레이 없이 동시 실행
+        };
     }
 
     /// <summary>
-    /// 레시피가 완성될 때 RecipeQueueManager에서 호출합니다.
-    /// 연결된 손님을 퇴장 애니메이션과 함께 제거하고 슬롯을 해제합니다.
+    /// 레시피가 완성될 때 호출. 만족 리액션 후 퇴장.
     /// </summary>
     public void OnRecipeCompleted(RecipeUI card)
     {
         if (card == null) return;
-        if (!cardToCustomer.TryGetValue(card, out Customer customer))
-            return;
+        if (!cardToCustomer.TryGetValue(card, out Customer customer)) return;
 
-        // 매핑에서 먼저 제거
         cardToCustomer.Remove(card);
-
         if (customer == null) return;
 
         int idx = customer.SlotIndex;
-
-        // 슬롯 즉시 해제 → 새 손님이 바로 이 슬롯을 사용할 수 있음
         if (idx >= 0 && idx < slots.Length && slots[idx] == customer)
             slots[idx] = null;
 
-        // 퇴장 애니메이션 (완료 후 자동 Destroy)
-        customer.Disappear();
+        customer.DisappearSatisfied();
+    }
+
+    /// <summary>
+    /// 제한시간 초과 시 호출. 불만 리액션 후 퇴장.
+    /// </summary>
+    public void OnRecipeTimedOut(RecipeUI card)
+    {
+        if (card == null) return;
+        if (!cardToCustomer.TryGetValue(card, out Customer customer)) return;
+
+        cardToCustomer.Remove(card);
+        if (customer == null) return;
+
+        int idx = customer.SlotIndex;
+        if (idx >= 0 && idx < slots.Length && slots[idx] == customer)
+            slots[idx] = null;
+
+        customer.DisappearUnsatisfied();
     }
 
     /// <summary>
@@ -131,10 +152,6 @@ public class CustomerManager : MonoBehaviour
 
     // ─────────────────── 내부 유틸 ───────────────────
 
-    /// <summary>
-    /// 왼쪽(인덱스 0)부터 탐색해 가장 앞의 빈 슬롯 인덱스를 반환합니다.
-    /// 모든 슬롯이 차 있으면 -1 반환.
-    /// </summary>
     private int FindEmptySlot()
     {
         for (int i = 0; i < slots.Length; i++)

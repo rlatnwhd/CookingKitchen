@@ -162,6 +162,18 @@ public class RecipeUI : MonoBehaviour
     }
 
     /// <summary>
+    /// 현재 레시피의 완성품 스프라이트를 반환합니다.
+    /// CustomerManager가 말풍선 아이콘으로 사용합니다.
+    /// </summary>
+    public Sprite GetDishSprite()
+    {
+        if (currentRecipe == null) return null;
+        if (recipeSpriteMap.ContainsKey(currentRecipe.recipeName))
+            return recipeSpriteMap[currentRecipe.recipeName];
+        return null;
+    }
+
+    /// <summary>
     /// 현재 레시피의 모든 재료를 플레이어가 보유하고 있는지 확인합니다.
     /// (각 재료당 1개 이상 필요)
     /// </summary>

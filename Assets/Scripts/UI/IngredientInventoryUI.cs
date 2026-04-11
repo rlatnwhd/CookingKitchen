@@ -90,11 +90,28 @@ public class IngredientInventoryUI : MonoBehaviour
 
     /// <summary>
     /// PlayerInventory.OnIngredientChanged 이벤트 핸들러
-    /// 변경된 재료의 슬롯만 골라서 수량을 갱신합니다.
+    /// count 파라미터를 쓰지 않고 PlayerInventory에서 현재값을 직접 읽습니다.
+    /// (이벤트 중첩 호출 시 stale count로 UI가 덮어써지는 버그 방지)
     /// </summary>
     private void OnIngredientChanged(IngredientType type, int count)
     {
+        // 이벤트로 전달된 count는 중첩 호출 시 오래된 값일 수 있으므로 실제 재고를 직접 읽음
+        int actualCount = PlayerInventory.Instance != null
+            ? PlayerInventory.Instance.GetCount(type)
+            : count;
+
         if (slotMap.ContainsKey(type))
-            slotMap[type].UpdateCount(count);
+        {
+            slotMap[type].UpdateCount(actualCount);
+        }
+        else if (actualCount > 0)
+        {
+            BuildSlots(currentRound);
+            if (PlayerInventory.Instance != null)
+            {
+                foreach (var kv in slotMap)
+                    kv.Value.UpdateCount(PlayerInventory.Instance.GetCount(kv.Key));
+            }
+        }
     }
 }

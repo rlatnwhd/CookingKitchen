@@ -64,6 +64,13 @@ public class RecipeQueueManager : MonoBehaviour
     [Tooltip("CustomerManager를 할당하면 레시피 등장/완성 시 손님이 함께 등장/퇴장합니다")]
     public CustomerManager customerManager;
 
+    [Tooltip("IngredientInventoryUI를 할당하면 라운드 변경 시 인벤토리 슬롯을 자동 동기화합니다")]
+    public IngredientInventoryUI ingredientInventoryUI;
+
+    [Header("제한시간")]
+    [Tooltip("레시피당 제한시간 (초). 0이면 제한시간 없음")]
+    public float recipeTimeLimit = 20f;
+
     // 현재 화면에 표시 중인 레시피 카드 목록 (인덱스 0 = 상단)
     private List<RecipeUI> activeCards = new List<RecipeUI>();
 
@@ -79,6 +86,12 @@ public class RecipeQueueManager : MonoBehaviour
 
     // 완성 쿨다운 진행 중 여부 (true 동안 완성 판정 차단)
     private bool isInCooldown = false;
+
+    // 손님 등장 → 말풍선 → 카드 등장 진행 중 여부
+    private bool isSpawning = false;
+
+    // 슬라이드 인이 완료되지 않은 카드 집합 (완료 전엔 레시피 완성 불가)
+    private HashSet<RecipeUI> slidingInCards = new HashSet<RecipeUI>();
 
     // 스폰 코루틴 참조
     private Coroutine spawnCoroutine;
@@ -99,6 +112,11 @@ public class RecipeQueueManager : MonoBehaviour
         // PlayerInventory 이벤트 구독
         if (PlayerInventory.Instance != null)
             PlayerInventory.Instance.OnIngredientChanged += OnIngredientChanged;
+
+        // IngredientInventoryUI 런디 동기화
+        // RecipeQueueManager.currentRound와 IngredientInventoryUI.currentRound가 다르면
+        // 인벤토리 패널에 해당 라운드의 재료가 안 만들어져 수량 변경이 표시되지 않는 버그가 발생합니다
+        ingredientInventoryUI?.BuildSlots(currentRound);
 
         if (autoStart)
             StartSpawning();
@@ -141,8 +159,8 @@ public class RecipeQueueManager : MonoBehaviour
 
     private void TrySpawnRecipe()
     {
-        // 애니메이션 중이거나 최대 개수면 생성 안 함
         if (isAnimating) return;
+        if (isSpawning) return;
         if (activeCards.Count >= maxRecipeCount) return;
 
         SpawnRandomRecipe();
@@ -159,18 +177,16 @@ public class RecipeQueueManager : MonoBehaviour
 
         RecipeData selected = recipes[Random.Range(0, recipes.Count)];
 
+        // 카드 생성 (아직 화면에 나타나지 않음 — 손님 등장 후 슬라이드 인)
         GameObject cardObj = Instantiate(recipeCardPrefab, cardParent);
         RecipeUI card = cardObj.GetComponent<RecipeUI>();
         if (card == null) { Destroy(cardObj); return; }
 
-        // ── 카드 RectTransform을 상단 좌측 기준으로 강제 설정 ──
-        // cardParent가 상단 좌측(pivot 0,1) 기준이어야 올바르게 쌓임
         RectTransform rt = card.RectTransform;
         rt.anchorMin = new Vector2(0f, 1f);
         rt.anchorMax = new Vector2(0f, 1f);
         rt.pivot     = new Vector2(0f, 1f);
 
-        // 프리팹 읽기 실패로 cardHeight가 0이면 생성된 카드에서 직접 읽음
         if (cardHeight <= 0)
         {
             cardHeight = rt.sizeDelta.y > 0 ? rt.sizeDelta.y : rt.rect.height;
@@ -182,16 +198,66 @@ public class RecipeQueueManager : MonoBehaviour
         card.SetRecipe(selected);
         activeCards.Add(card);
 
-        // 이 카드의 목표 Y: 상단부터 차례로 아래로
+        // ── 카드 생성 즉시 slidingInCards에 등록 ──
+        // 손님 등장 → 슬라이드 인 완료까지 TryCompleteTopRecipe() 차단
+        slidingInCards.Add(card);
+
+        // ── 원형 타이머 자동 추가 (prefab에 RecipeTimer가 없어도 자동 생성) ──
+        if (recipeTimeLimit > 0 && card.GetComponent<RecipeTimer>() == null)
+            cardObj.AddComponent<RecipeTimer>();
+
         float targetY = CalculateCardY(activeCards.Count - 1);
-        StartCoroutine(SlideIn(rt, targetY));
+
+        // 음식 스프라이트 가져오기 (말풍선용)
+        Sprite foodSprite = card.GetDishSprite();
+
+        // 카드를 화면 밖에 숨겨놓고 손님 등장을 기다림
+        rt.anchoredPosition = new Vector2(slideStartX, targetY);
+
+        if (customerManager != null)
+        {
+            isSpawning = true;
+            customerManager.OnRecipeSpawned(card, foodSprite, () =>
+            {
+                // 손님 등장 + 말풍선 완료 후 카드 슬라이드 인
+                isSpawning = false;
+                StartCoroutine(SlideInThenStartTimer(card, rt, targetY));
+            });
+        }
+        else
+        {
+            // CustomerManager 없으면 즉시 슬라이드 인
+            StartCoroutine(SlideInThenStartTimer(card, rt, targetY));
+        }
 
         RefreshCardSlots(card);
+    }
 
-        // 손님 등장 (CustomerManager가 할당된 경우)
-        customerManager?.OnRecipeSpawned(card);
+    /// <summary>
+    /// 카드 슬라이드 인 후 타이머를 시작합니다.
+    /// </summary>
+    private IEnumerator SlideInThenStartTimer(RecipeUI card, RectTransform rt, float targetY)
+    {
+        // 슬라이드 시작 전에 이미 카드가 삭제된 경우 (레시피 즉시 완성 등) 조기 종료
+        if (card == null || rt == null) yield break;
 
-        // 스폰 후 조합 체크는 슬라이드 완료 후에 실행 (SlideIn 안에서 호출)
+        slidingInCards.Add(card); // 슬라이드 진행 중 표시 → 완성 판정 차단
+        yield return StartCoroutine(SlideIn(rt, targetY));
+        slidingInCards.Remove(card); // 슬라이드 완료 → 완성 판정 허용
+
+        // 슬라이드가 끝난 시점에 외부 이벤트 없이도 즉시 완성 체크
+        TryCompleteTopRecipe();
+
+        // 타이머 시작
+        if (recipeTimeLimit > 0 && card != null)
+        {
+            RecipeTimer timer = card.GetComponent<RecipeTimer>();
+            if (timer != null)
+            {
+                timer.OnTimeExpired += () => OnRecipeTimedOut(card);
+                timer.StartTimer(recipeTimeLimit);
+            }
+        }
     }
 
     // ──────────────────────── 위치 계산 ────────────────────────
@@ -209,6 +275,9 @@ public class RecipeQueueManager : MonoBehaviour
 
     private IEnumerator SlideIn(RectTransform rt, float targetY)
     {
+        // 카드가 슬라이드 중에 삭제(레시피 완성·타임아웃)되었을 때 MissingReferenceException 방지
+        if (rt == null) yield break;
+
         Vector2 start = new Vector2(slideStartX, targetY);
         Vector2 end   = new Vector2(slideEndX,   targetY);
         rt.anchoredPosition = start;
@@ -216,16 +285,15 @@ public class RecipeQueueManager : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < slideDuration)
         {
+            if (rt == null) yield break;   // 루프 도중 삭제 체크
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / slideDuration);
             float smooth = 1f - Mathf.Pow(1f - t, 3f); // EaseOut Cubic
             rt.anchoredPosition = Vector2.Lerp(start, end, smooth);
             yield return null;
         }
-        rt.anchoredPosition = end;
-
-        // 슬라이드 완료 후 조합 체크
-        TryCompleteTopRecipe();
+        if (rt != null) rt.anchoredPosition = end;
+        // 슬라이드 완료 후 조합 체크는 SlideInThenStartTimer에서 slidingInCards 제거 후에 호출됩니다
     }
 
     private IEnumerator SlideOut(RectTransform rt)
@@ -293,23 +361,29 @@ public class RecipeQueueManager : MonoBehaviour
         RecipeUI topCard = activeCards[0];
         if (topCard == null) return;
 
+        // 카드가 아직 슬라이드 인 중이면 완성 판정 불가 (화면에 완전히 뜬 후 가능)
+        if (slidingInCards.Contains(topCard)) return;
+
         if (topCard.CanComplete())
         {
             // ★ ConsumeIngredients가 OnIngredientChanged를 즉시 발생시키므로
             //   isAnimating을 먼저 true로 설정해 무한 재귀를 방지합니다.
             isAnimating = true;
             isInCooldown = true;
-            activeCards.RemoveAt(0);      // 목록에서 먼저 제거 (재진입 시 Count=0으로 차단)
-            topCard.ConsumeIngredients(); // 이벤트 발생 → 재진입하더라도 위에서 가로막힘
+            activeCards.RemoveAt(0);        // 목록에서 먼저 제거 (재진입 시 Count=0으로 차단)
+            slidingInCards.Remove(topCard); // 슬라이드 중이었어도 제거
+            topCard.ConsumeIngredients();   // 재료 1개씩 차감 → OnIngredientChanged 발생
             StartCoroutine(CompleteSequence(topCard));
         }
     }
 
     private IEnumerator CompleteSequence(RecipeUI completedCard)
     {
-        // isAnimating, isInCooldown은 TryCompleteTopRecipe에서 이미 true로 설정됨
+        // 타이머 정지
+        RecipeTimer timer = completedCard.GetComponent<RecipeTimer>();
+        if (timer != null) timer.StopTimer();
 
-        // 손님 퇴장 시작 (레시피 슬라이드 아웃과 동시에 진행)
+        // 손님 만족 퇴장
         customerManager?.OnRecipeCompleted(completedCard);
 
         // 1. 완성 카드 슬라이드 아웃
@@ -330,6 +404,61 @@ public class RecipeQueueManager : MonoBehaviour
         isInCooldown = false;
 
         // 5. 연쇄 완성 체크
+        TryCompleteTopRecipe();
+    }
+
+    // ──────────────────────── 제한시간 초과 ────────────────────────
+
+    /// <summary>
+    /// 카드의 제한시간이 만료되었을 때 RecipeTimer에서 호출됩니다.
+    /// 해당 카드와 손님이 함께 퇴장합니다.
+    /// </summary>
+    private void OnRecipeTimedOut(RecipeUI card)
+    {
+        if (card == null) return;
+        if (!activeCards.Contains(card)) return;
+
+        // 애니메이션 중이면 대기 후 시도
+        if (isAnimating)
+        {
+            StartCoroutine(RetryTimedOutAfterAnimation(card));
+            return;
+        }
+
+        // 카드 목록에서 제거
+        activeCards.Remove(card);
+        slidingInCards.Remove(card); // 슬라이드 중이었어도 제거
+
+        // 손님 불만 퇴장
+        customerManager?.OnRecipeTimedOut(card);
+
+        // 카드 슬라이드 아웃 + 정리
+        StartCoroutine(TimeOutSequence(card));
+    }
+
+    private IEnumerator RetryTimedOutAfterAnimation(RecipeUI card)
+    {
+        // 애니메이션이 끝날 때까지 대기
+        while (isAnimating)
+            yield return null;
+
+        OnRecipeTimedOut(card);
+    }
+
+    private IEnumerator TimeOutSequence(RecipeUI card)
+    {
+        isAnimating = true;
+
+        yield return StartCoroutine(SlideOut(card.RectTransform));
+        Destroy(card.gameObject);
+
+        yield return StartCoroutine(ShiftCardsUp());
+
+        isAnimating = false;
+
+        foreach (var c in activeCards)
+            if (c != null) RefreshCardSlots(c);
+
         TryCompleteTopRecipe();
     }
 
@@ -384,8 +513,13 @@ public class RecipeQueueManager : MonoBehaviour
         foreach (var card in activeCards)
             if (card != null) Destroy(card.gameObject);
         activeCards.Clear();
+        slidingInCards.Clear();
         isAnimating = false;
         isInCooldown = false;
+        isSpawning = false;
         customerManager?.ClearAll();
+
+        // 인벤토리 UI도 함께 라운드 업데이트
+        ingredientInventoryUI?.BuildSlots(round);
     }
 }
