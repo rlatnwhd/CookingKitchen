@@ -125,12 +125,12 @@ TextureImporter:
       name: player_idle_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 1028
-        width: 94
-        height: 122
+        x: 352
+        y: 1029
+        width: 92
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: player_idle_1
       rect:
         serializedVersion: 2
-        x: 1145
-        y: 1028
-        width: 94
-        height: 118
+        x: 1146
+        y: 1029
+        width: 92
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -169,12 +169,12 @@ TextureImporter:
       name: player_idle_2
       rect:
         serializedVersion: 2
-        x: 351
-        y: 323
-        width: 94
-        height: 118
+        x: 352
+        y: 324
+        width: 92
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -191,12 +191,12 @@ TextureImporter:
       name: player_idle_3
       rect:
         serializedVersion: 2
-        x: 1145
-        y: 323
-        width: 94
-        height: 122
+        x: 1146
+        y: 324
+        width: 92
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1045ab1d8f1f1a54fa87eb5b09d82fa0
     internalID: 0
     vertices: []
     indices: 
