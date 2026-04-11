@@ -1,0 +1,852 @@
+fileFormatVersion: 2
+guid: b6c38140445898749b540a090a3abe2a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4849250389985300492
+    second: CustomerSet_2_0
+  - first:
+      213: -2984494581997959364
+    second: CustomerSet_2_1
+  - first:
+      213: 1983265023737537896
+    second: CustomerSet_2_2
+  - first:
+      213: 7950094687459449105
+    second: CustomerSet_2_3
+  - first:
+      213: -2674603892469585707
+    second: CustomerSet_2_4
+  - first:
+      213: -1172352515316856546
+    second: CustomerSet_2_5
+  - first:
+      213: -6790109858781225659
+    second: CustomerSet_2_6
+  - first:
+      213: 5055997065677738484
+    second: CustomerSet_2_7
+  - first:
+      213: 329406034759528488
+    second: CustomerSet_2_8
+  - first:
+      213: 3906845208275608934
+    second: CustomerSet_2_9
+  - first:
+      213: 8037854588145118039
+    second: CustomerSet_2_10
+  - first:
+      213: -7869118511934563027
+    second: CustomerSet_2_11
+  - first:
+      213: -5657440945421970008
+    second: CustomerSet_2_12
+  - first:
+      213: -6035615748151984316
+    second: CustomerSet_2_13
+  - first:
+      213: 9105521721745220577
+    second: CustomerSet_2_14
+  - first:
+      213: -6802230874747179142
+    second: CustomerSet_2_15
+  - first:
+      213: -8922144760794218739
+    second: CustomerSet_2_16
+  - first:
+      213: 8902084708811878024
+    second: CustomerSet_2_17
+  - first:
+      213: 5147014970227669512
+    second: CustomerSet_2_18
+  - first:
+      213: 6790489243176692847
+    second: CustomerSet_2_19
+  - first:
+      213: -2281239509495743563
+    second: CustomerSet_2_20
+  - first:
+      213: -2621414964173158791
+    second: CustomerSet_2_21
+  - first:
+      213: -8048456213385923220
+    second: CustomerSet_2_22
+  - first:
+      213: -9146084471712130833
+    second: CustomerSet_2_23
+  - first:
+      213: 5708967461838169887
+    second: CustomerSet_2_24
+  - first:
+      213: 8580889364958172826
+    second: CustomerSet_2_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CustomerSet_2_0
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 555
+        width: 70
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c009ff9898ffb4340800000000000000
+      internalID: 4849250389985300492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_1
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 554
+        width: 69
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c370fed7df1f496d0800000000000000
+      internalID: -2984494581997959364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_2
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 554
+        width: 80
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86525530809f58b10800000000000000
+      internalID: 1983265023737537896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_3
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 554
+        width: 89
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1199db03ff8645e60800000000000000
+      internalID: 7950094687459449105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_4
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 555
+        width: 70
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d829723ee5e1ead0800000000000000
+      internalID: -2674603892469585707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_5
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 555
+        width: 89
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e19c0054997fabfe0800000000000000
+      internalID: -1172352515316856546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_6
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 378
+        width: 75
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54d97791f0fa4c1a0800000000000000
+      internalID: -6790109858781225659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_7
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 379
+        width: 80
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f1932d1b828a2640800000000000000
+      internalID: 5055997065677738484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_8
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 378
+        width: 79
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82036b81b09429400800000000000000
+      internalID: 329406034759528488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_9
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 379
+        width: 80
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66564bf7407e73630800000000000000
+      internalID: 3906845208275608934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_10
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 378
+        width: 80
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75b22aa59223c8f60800000000000000
+      internalID: 8037854588145118039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_11
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 379
+        width: 81
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d90b0e7664bc290800000000000000
+      internalID: -7869118511934563027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_12
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 378
+        width: 80
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a59f5e3f6bbc71b0800000000000000
+      internalID: -5657440945421970008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_13
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 379
+        width: 80
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44fb5a2847f2d3ca0800000000000000
+      internalID: -6035615748151984316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_14
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 202
+        width: 91
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e32a3743cf4d5e70800000000000000
+      internalID: 9105521721745220577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_15
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 202
+        width: 80
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7fef762f0f9991a0800000000000000
+      internalID: -6802230874747179142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_16
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 202
+        width: 92
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f7f329c9c2e2480800000000000000
+      internalID: -8922144760794218739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_17
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 202
+        width: 80
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88e2b2d90ee8a8b70800000000000000
+      internalID: 8902084708811878024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_18
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 202
+        width: 69
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80ab90a68dedd6740800000000000000
+      internalID: 5147014970227669512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_19
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 202
+        width: 90
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c68a63df9ac3e50800000000000000
+      internalID: 6790489243176692847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_20
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 32
+        width: 79
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb7beca0c86750e0800000000000000
+      internalID: -2281239509495743563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_21
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 26
+        width: 74
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 976c09b9afcde9bd0800000000000000
+      internalID: -2621414964173158791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_22
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 26
+        width: 91
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c65b8da67b32e4090800000000000000
+      internalID: -8048456213385923220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_23
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 26
+        width: 85
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe8d1e981a4921180800000000000000
+      internalID: -9146084471712130833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_24
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 26
+        width: 81
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f17a02db8a35a3f40800000000000000
+      internalID: 5708967461838169887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_25
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 554
+        width: 89
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a965247f961751770800000000000000
+      internalID: 8580889364958172826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_26
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 555
+        width: 83
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93c72afc475ba184fb4d09a32a67dd32
+      internalID: 289231832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CustomerSet_2_27
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 26
+        width: 88
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba41cace992d47246ac9339a9d243cfe
+      internalID: 990800481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fd556c4aa1993be4db0b4d3f59e1d9c5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CustomerSet_2_0: 4849250389985300492
+      CustomerSet_2_1: -2984494581997959364
+      CustomerSet_2_10: 8037854588145118039
+      CustomerSet_2_11: -7869118511934563027
+      CustomerSet_2_12: -5657440945421970008
+      CustomerSet_2_13: -6035615748151984316
+      CustomerSet_2_14: 9105521721745220577
+      CustomerSet_2_15: -6802230874747179142
+      CustomerSet_2_16: -8922144760794218739
+      CustomerSet_2_17: 8902084708811878024
+      CustomerSet_2_18: 5147014970227669512
+      CustomerSet_2_19: 6790489243176692847
+      CustomerSet_2_2: 1983265023737537896
+      CustomerSet_2_20: -2281239509495743563
+      CustomerSet_2_21: -2621414964173158791
+      CustomerSet_2_22: -8048456213385923220
+      CustomerSet_2_23: -9146084471712130833
+      CustomerSet_2_24: 5708967461838169887
+      CustomerSet_2_25: 8580889364958172826
+      CustomerSet_2_26: 289231832
+      CustomerSet_2_27: 990800481
+      CustomerSet_2_3: 7950094687459449105
+      CustomerSet_2_4: -2674603892469585707
+      CustomerSet_2_5: -1172352515316856546
+      CustomerSet_2_6: -6790109858781225659
+      CustomerSet_2_7: 5055997065677738484
+      CustomerSet_2_8: 329406034759528488
+      CustomerSet_2_9: 3906845208275608934
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
