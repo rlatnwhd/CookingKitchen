@@ -373,6 +373,14 @@ public class RecipeQueueManager : MonoBehaviour
             activeCards.RemoveAt(0);        // 목록에서 먼저 제거 (재진입 시 Count=0으로 차단)
             slidingInCards.Remove(topCard); // 슬라이드 중이었어도 제거
             topCard.ConsumeIngredients();   // 재료 1개씩 차감 → OnIngredientChanged 발생
+
+            // 재료 수 × 100 점수 추가
+            if (ScoreManager.Instance != null)
+            {
+                int ingredientCount = topCard.GetCurrentRecipe()?.ingredients.Length ?? 0;
+                ScoreManager.Instance.AddScore(ingredientCount * 100);
+            }
+
             StartCoroutine(CompleteSequence(topCard));
         }
     }
