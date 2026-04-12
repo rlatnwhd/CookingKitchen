@@ -40,6 +40,14 @@ public class IngredientSpawner : MonoBehaviour
     [Tooltip("결핍 보정 강도 (높을수록 덜 나온 재료가 더 자주 나옴, 기본값: 2)")]
     public float deficitBoostMultiplier = 2f;
 
+    [Header("상한 식재료 설정")]
+    [Tooltip("상한 식재료 프리팹 (SpriteRenderer + Rigidbody2D + Collider2D(trigger) + SpoiledIngredient)")]
+    public GameObject spoiledPrefab;
+
+    [Tooltip("일반 재료 대신 상한 식재료가 스폰될 확률 (0.0~1.0, 기본값 0.15 = 15%)")]
+    [Range(0f, 1f)]
+    public float spoiledSpawnChance = 0.15f;
+
     [Header("재료 프리팹 할당")]
     [Tooltip("각 재료 타입에 대응하는 프리팹을 할당하세요 (18종류)")]
     public IngredientPrefabEntry[] ingredientPrefabs;
@@ -144,10 +152,36 @@ public class IngredientSpawner : MonoBehaviour
     }
 
     /// <summary>
+    /// 지정한 재료 타입의 프리팹에서 스프라이트를 반환합니다.
+    /// PlayerCollector의 BurstOwnedIngredients()에서 드랍 비주얼 생성 시 사용합니다.
+    /// </summary>
+    public Sprite GetIngredientSprite(IngredientType type)
+    {
+        if (prefabMap.ContainsKey(type))
+        {
+            SpriteRenderer sr = prefabMap[type].GetComponent<SpriteRenderer>();
+            if (sr != null) return sr.sprite;
+        }
+        return null;
+    }
+
+    /// <summary>
     /// 공평한 가중치를 계산하여 하나의 재료를 하늘에서 생성합니다.
+    /// 일정 확률로 상한 식재료가 대신 스폰됩니다.
     /// </summary>
     private void SpawnIngredient()
     {
+        // 스폰 위치: X는 범위 내 랜덤, Y는 설정값
+        float randomX = Random.Range(-spawnXRange, spawnXRange);
+        Vector2 spawnPosition = new Vector2(randomX, spawnYPosition);
+
+        // 일정 확률로 상한 식재료 스폰
+        if (spoiledPrefab != null && Random.value < spoiledSpawnChance)
+        {
+            Instantiate(spoiledPrefab, spawnPosition, Quaternion.identity);
+            return;
+        }
+
         // 공평성 보정을 적용하여 스폰할 재료 선택
         IngredientType selectedType = SelectIngredientFairly();
 
@@ -157,10 +191,6 @@ public class IngredientSpawner : MonoBehaviour
             Debug.LogWarning($"[IngredientSpawner] {selectedType} 프리팹이 할당되지 않았습니다!");
             return;
         }
-
-        // 스폰 위치: X는 범위 내 랜덤, Y는 설정값
-        float randomX = Random.Range(-spawnXRange, spawnXRange);
-        Vector2 spawnPosition = new Vector2(randomX, spawnYPosition);
 
         // 재료 오브젝트 생성
         GameObject spawned = Instantiate(prefabMap[selectedType], spawnPosition, Quaternion.identity);
