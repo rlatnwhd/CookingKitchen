@@ -326,14 +326,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   spriteRenderer: {fileID: 4272324418198973859}
   bubbleBackgroundSprite: {fileID: 8867661100803839916, guid: da253616226c36d4a95558691c988bc3, type: 3}
-  bubbleOffset: {x: 0, y: 2, z: 0.01}
+  bubbleOffset: {x: 0, y: 2, z: -0.1}
   bubbleScale: 2
   foodIconScale: 1
   bubblePopDuration: 0.3
   bubbleAutoHideDuration: 3
   satisfiedSprite: {fileID: -2812141585452657965, guid: d6669d6b4a67f5f449f08bb673507fbf, type: 3}
   unsatisfiedSprite: {fileID: 9221536177141706121, guid: 969a14f5c673a0044af90b57ca0511c9, type: 3}
-  reactionOffset: {x: 0, y: 2, z: 0.01}
+  reactionOffset: {x: 0, y: 2, z: -0.1}
   reactionIconScale: 2
   sortingLayerName: Default
   bubbleSortingOrder: 5

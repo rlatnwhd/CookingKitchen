@@ -40,6 +40,11 @@ public class HpManager : MonoBehaviour
     private Coroutine invincibilityCoroutine;
 
     /// <summary>
+    /// 현재 HP 값입니다. GameManager가 GameData에 저장할 때 사용합니다.
+    /// </summary>
+    public int CurrentHp => currentHp;
+
+    /// <summary>
     /// 현재 무적 상태인지 확인합니다.
     /// PlayerCollector에서 상한 식재료 무시 여부 판단에 사용합니다.
     /// </summary>
@@ -65,7 +70,9 @@ public class HpManager : MonoBehaviour
             return;
         }
 
-        currentHp = maxHp;
+        // GameData가 존재하면 이전 스테이지의 HP를 이어받음, 없으면 최대값 사용
+        currentHp = (GameData.Instance != null) ? GameData.Instance.CurrentHp : maxHp;
+        UpdateHeartUI();
     }
 
     /// <summary>

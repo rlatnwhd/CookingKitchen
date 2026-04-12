@@ -39,6 +39,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void HandleMovement()
     {
+        // 게임이 멈춘 상태이면 입력 차단 + Rigidbody 정지
+        if (GameManager.IsGameStopped)
+        {
+            rb.linearVelocity = Vector2.zero;
+            if (animator != null) animator.SetBool("IsWalking", false);
+            return;
+        }
+
         // A키: -1, D키: +1, 아무것도 없으면: 0
         float horizontalInput = Input.GetAxisRaw("Horizontal");
 
