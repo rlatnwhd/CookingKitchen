@@ -34,6 +34,9 @@ public class RecipeQueueManager : MonoBehaviour
     [Tooltip("새 레시피 등장 간격 (초)")]
     public float spawnInterval = 5f;
 
+    [Tooltip("첫 손님이 등장하기 전 초기 대기 시간 (초). 셀터가 열린 후 이 시간에 첫 손님이 등장합니다.")]
+    public float firstSpawnDelay = 5f;
+
     [Header("슬라이드 애니메이션")]
     [Tooltip("카드가 등장할 때 시작하는 X 위치 (화면 왼쪽 밖, 음수)")]
     public float slideStartX = -400f;
@@ -147,7 +150,8 @@ public class RecipeQueueManager : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
-        // 첫 번째 레시피는 즉시 생성
+        // 셔터가 열린 뒤 firstSpawnDelay 초 후 첫 손님 등장
+        yield return new WaitForSeconds(firstSpawnDelay);
         TrySpawnRecipe();
 
         while (true)

@@ -460,18 +460,18 @@ MonoBehaviour:
   recipeCardPrefab: {fileID: 8921807543797898294, guid: 979f47e9061e958448a6ac61207e2e86, type: 3}
   cardParent: {fileID: 424088610}
   maxRecipeCount: 4
-  spawnInterval: 5
+  spawnInterval: 4
   firstSpawnDelay: 5
   slideStartX: -400
   slideEndX: 0
   slideDuration: 0.3
   cardSpacing: 20
-  currentRound: 1
+  currentRound: 2
   autoStart: 1
   completionCooldown: 1
   customerManager: {fileID: 1056765203}
   ingredientInventoryUI: {fileID: 1620661096}
-  recipeTimeLimit: 25
+  recipeTimeLimit: 20
 --- !u!1 &448683160
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,7 +976,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ROUND 1
+  m_text: ROUND 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
@@ -1418,18 +1418,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f78a5b61ab2adc40bfa49601dfef5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSpawner
-  spawnInterval: 1.5
+  spawnInterval: 1
   spawnXRange: 5.6
   spawnYPosition: 6
   autoStartOnPlay: 1
-  currentRound: 1
+  currentRound: 2
   recipeQueueManager: {fileID: 424088612}
   recipeIngredientsBoostMultiplier: 10
   deficitBoostMultiplier: 4
   spoiledPrefabs:
   - {fileID: 3053416266163899916, guid: bd9e1b70590866046abf19340d71e7a9, type: 3}
   - {fileID: 5922070910651333240, guid: 99a43b772eb02424690f50b1b5fd19de, type: 3}
-  spoiledSpawnChance: 0.1
+  spoiledSpawnChance: 0.15
   ingredientPrefabs:
   - type: 7
     prefab: {fileID: 6087530302911281937, guid: 222e49258c51308429b749580c0bef12, type: 3}
@@ -1826,7 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635b4c522180a534da9de513b830b274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  stageIndex: 1
+  stageIndex: 2
   stageSceneNames:
   - Stage1Scene
   - Stage2Scene
@@ -1923,7 +1923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ROUND 1
+  m_text: ROUND 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientInventoryUI
   slotPrefab: {fileID: 5185175810400362038, guid: ee7061183ae5ce449a02d9adcfd16488, type: 3}
   slotParent: {fileID: 632630434}
-  currentRound: 1
+  currentRound: 2
   ingredientSprites:
   - type: 7
     sprite: {fileID: 2868545619943879554, guid: b77e0e545f994c94e8391abc2228cf9b, type: 3}
