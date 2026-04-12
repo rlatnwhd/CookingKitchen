@@ -239,6 +239,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab307950920e5a4f9001f908370f409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollector
+  droppedIngredientPrefab: {fileID: 8796536398898180341, guid: 11b4ef84ab7ed4143807a9aba8b77c70, type: 3}
+  ingredientSpawner: {fileID: 855379703}
+  burstForce: 5
+  burstTorque: 50
+  dropScale: 2.5
 --- !u!61 &328992060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1142,8 +1147,12 @@ MonoBehaviour:
   autoStartOnPlay: 1
   currentRound: 3
   recipeQueueManager: {fileID: 424088612}
-  recipeIngredientsBoostMultiplier: 4
-  deficitBoostMultiplier: 2
+  recipeIngredientsBoostMultiplier: 8
+  deficitBoostMultiplier: 4
+  spoiledPrefabs:
+  - {fileID: 3053416266163899916, guid: bd9e1b70590866046abf19340d71e7a9, type: 3}
+  - {fileID: 5922070910651333240, guid: 99a43b772eb02424690f50b1b5fd19de, type: 3}
+  spoiledSpawnChance: 0.15
   ingredientPrefabs:
   - type: 7
     prefab: {fileID: 6087530302911281937, guid: 222e49258c51308429b749580c0bef12, type: 3}
@@ -1431,6 +1440,7 @@ GameObject:
   - component: {fileID: 1153834638}
   - component: {fileID: 1153834640}
   - component: {fileID: 1153834641}
+  - component: {fileID: 1153834642}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1489,6 +1499,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ab5151eef5e724ea209a676eac85a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+--- !u!114 &1153834642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153834637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c5c8efe5e941544a6bf34b02e31605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HpManager
+  maxHp: 3
+  heartImages:
+  - {fileID: 203121767}
+  - {fileID: 448683162}
+  - {fileID: 1953713975}
+  invincibilityDuration: 1.5
+  blinkInterval: 0.1
+  playerSpriteRenderer: {fileID: 782662812}
 --- !u!1 &1221738571
 GameObject:
   m_ObjectHideFlags: 0

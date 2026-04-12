@@ -41,8 +41,8 @@ public class IngredientSpawner : MonoBehaviour
     public float deficitBoostMultiplier = 2f;
 
     [Header("상한 식재료 설정")]
-    [Tooltip("상한 식재료 프리팹 (SpriteRenderer + Rigidbody2D + Collider2D(trigger) + SpoiledIngredient)")]
-    public GameObject spoiledPrefab;
+    [Tooltip("상한 식재료 프리팹 목록 (2종류 모두 할당, 스폰 시 랜덤 선택)")]
+    public GameObject[] spoiledPrefabs;
 
     [Tooltip("일반 재료 대신 상한 식재료가 스폰될 확률 (0.0~1.0, 기본값 0.15 = 15%)")]
     [Range(0f, 1f)]
@@ -175,11 +175,15 @@ public class IngredientSpawner : MonoBehaviour
         float randomX = Random.Range(-spawnXRange, spawnXRange);
         Vector2 spawnPosition = new Vector2(randomX, spawnYPosition);
 
-        // 일정 확률로 상한 식재료 스폰
-        if (spoiledPrefab != null && Random.value < spoiledSpawnChance)
+        // 일정 확률로 상한 식재료 스폰 (배열에서 랜덤 선택)
+        if (spoiledPrefabs != null && spoiledPrefabs.Length > 0 && Random.value < spoiledSpawnChance)
         {
-            Instantiate(spoiledPrefab, spawnPosition, Quaternion.identity);
-            return;
+            GameObject pick = spoiledPrefabs[Random.Range(0, spoiledPrefabs.Length)];
+            if (pick != null)
+            {
+                Instantiate(pick, spawnPosition, Quaternion.identity);
+                return;
+            }
         }
 
         // 공평성 보정을 적용하여 스폰할 재료 선택

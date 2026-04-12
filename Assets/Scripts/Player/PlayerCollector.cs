@@ -29,6 +29,9 @@ public class PlayerCollector : MonoBehaviour
     [Tooltip("드랍 시 회전력")]
     public float burstTorque = 200f;
 
+    [Tooltip("드랍 식재료의 크기 배율 (1이면 원본 크기, 2면 2배 크기)")]
+    public float dropScale = 1f;
+
     /// <summary>
     /// 수집 콜라이더에 오브젝트가 닿으면 타입을 판별하여 처리합니다.
     /// </summary>
@@ -107,6 +110,9 @@ public class PlayerCollector : MonoBehaviour
                 Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
                 GameObject dropped = Instantiate(droppedIngredientPrefab, playerPos, Quaternion.identity);
+
+                // 크기 설정
+                dropped.transform.localScale = Vector3.one * dropScale;
 
                 // 스프라이트 설정
                 SpriteRenderer sr = dropped.GetComponent<SpriteRenderer>();
