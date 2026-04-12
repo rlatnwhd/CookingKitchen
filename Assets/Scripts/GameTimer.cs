@@ -33,7 +33,7 @@ public class GameTimer : MonoBehaviour
 
     void Update()
     {
-        // 게임이 멈췄거나 이미 종료된 경우 진행 안 함
+        // 게임이 멈췄거나 이미 종료된 경우 진행 안 함 (셔터 오픈 중 포함)
         if (!isRunning || GameManager.IsGameStopped) return;
 
         timeRemaining -= Time.deltaTime;
