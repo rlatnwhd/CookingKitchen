@@ -70,8 +70,8 @@ public class HpManager : MonoBehaviour
             return;
         }
 
-        // GameData가 존재하면 이전 스테이지의 HP를 이어받음, 없으면 최대값 사용
-        currentHp = (GameData.Instance != null) ? GameData.Instance.CurrentHp : maxHp;
+        // GameData static 필드에서 이전 스테이지의 HP를 읽음
+        currentHp = GameData.CurrentHp;
         UpdateHeartUI();
     }
 

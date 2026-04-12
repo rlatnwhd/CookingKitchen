@@ -146,7 +146,10 @@ public class IngredientSpawner : MonoBehaviour
     {
         while (true)
         {
-            SpawnIngredient();
+            // 셀터 오픈 중 또는 게임이 멈체있을때는 스폰 차단
+            if (!GameManager.IsGameStopped)
+                SpawnIngredient();
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }

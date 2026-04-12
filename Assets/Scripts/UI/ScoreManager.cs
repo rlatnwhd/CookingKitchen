@@ -32,8 +32,8 @@ public class ScoreManager : MonoBehaviour
             return;
         }
 
-        // GameData가 존재하면 이전 스테이지의 점수를 이어받음
-        Score = (GameData.Instance != null) ? GameData.Instance.CurrentScore : 0;
+        // GameData static 필드에서 이전 스테이지의 점수를 읽음
+        Score = GameData.CurrentScore;
     }
 
     /// <summary>점수를 추가합니다.</summary>
@@ -41,9 +41,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (amount <= 0) return;
         Score += amount;
-        // GameData에도 실시간 반영
-        if (GameData.Instance != null)
-            GameData.Instance.CurrentScore = Score;
+        GameData.CurrentScore = Score;
         OnScoreChanged?.Invoke(Score);
     }
 

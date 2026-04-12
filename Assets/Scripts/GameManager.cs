@@ -139,11 +139,10 @@ public class GameManager : MonoBehaviour
 
     private void SaveToGameData()
     {
-        if (GameData.Instance == null) return;
         if (HpManager.Instance != null)
-            GameData.Instance.CurrentHp = HpManager.Instance.CurrentHp;
+            GameData.CurrentHp = HpManager.Instance.CurrentHp;
         if (ScoreManager.Instance != null)
-            GameData.Instance.CurrentScore = ScoreManager.Instance.Score;
+            GameData.CurrentScore = ScoreManager.Instance.Score;
     }
 
     private void LoadScene(string sceneName)
