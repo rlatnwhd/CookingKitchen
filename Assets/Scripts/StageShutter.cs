@@ -74,6 +74,19 @@ public class StageShutter : MonoBehaviour
     }
 
     /// <summary>
+    /// [StartScene 전용] 셔터를 화면 위로 완전히 숨긴 상태(오픈 상태)로 초기화합니다.
+    /// PlayButton.Start()에서 호출하여 StartScene에서 셔터가 화면을 가리지 않게 합니다.
+    /// </summary>
+    public void InitializeOpen()
+    {
+        if (shutterPanel == null) return;
+        UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(shutterPanel);
+        float h = shutterPanel.rect.height > 10f ? shutterPanel.rect.height : Screen.height;
+        panelHeight = h;
+        SetPanelY(h);
+    }
+
+    /// <summary>
     /// [씬 시작 시 호출] 셔터를 닫힌 상태에서 위로 올려 게임을 드러냅니다.
     /// onComplete: 열림 완료 후 호출할 콜백 (= 게임 시작 시점)
     /// </summary>
