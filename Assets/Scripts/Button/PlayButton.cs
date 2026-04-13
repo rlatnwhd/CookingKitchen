@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// 플레이 버튼의 클릭 동작을 담당하는 스크립트
-/// - 클릭 시 GameData를 초기화(새 게임 시작)
-/// - 셔터가 "ROUND 1" 텍스트와 함께 아래로 내려오면서 Stage1Scene으로 전환됩니다.
+/// - 씬 시작 시 셔터가 "WELCOME" 텍스트와 함께 위로 올라가며 열립니다.
+/// - 클릭 시 GameData를 초기화하고 셔터가 "ROUND 1" 텍스트와 함께 내려오며 Stage1Scene으로 전환됩니다.
 ///
 /// [설정 안내]
 /// 1. Play Button 오브젝트에 이 스크립트를 부착합니다.
@@ -13,10 +13,6 @@ using UnityEngine.UI;
 /// 3. stage1SceneName에 첫 번째 스테이지 씬 이름을 입력합니다. (기본값: "Stage1Scene")
 /// 4. Button 컴포넌트의 OnClick()에 OnPlayButtonClicked()를 연결하거나
 ///    Awake에서 자동으로 연결됩니다.
-///
-/// [셔터 패널 초기 상태]
-/// - PlayButton은 Start()에서 stageShutter.InitializeOpen()을 호출합니다.
-/// - 이로 인해 StartScene에서 셔터 패널이 화면 위로 숨겨진 상태로 시작됩니다.
 /// </summary>
 [RequireComponent(typeof(Button))]
 public class PlayButton : MonoBehaviour
@@ -27,8 +23,11 @@ public class PlayButton : MonoBehaviour
     [Tooltip("첫 번째 스테이지 씬 이름")]
     public string stage1SceneName = "Stage1Scene";
 
-    [Tooltip("셔터에 표시할 텍스트")]
+    [Tooltip("플레이 버튼 클릭 시 셔터에 표시할 텍스트")]
     public string shutterText = "ROUND 1";
+
+    [Tooltip("씬 시작 시 셔터에 표시할 텍스트")]
+    public string welcomeText = "WELCOME";
 
     private bool isTransitioning = false;
 
@@ -40,9 +39,9 @@ public class PlayButton : MonoBehaviour
 
     void Start()
     {
-        // StartScene에서는 셔터가 화면을 가리면 안 되므로 열린 상태로 초기화
+        // StartScene 시작 시 셔터를 닫힌 상태(WELCOME 텍스트)에서 자동으로 위로 엽니다.
         if (stageShutter != null)
-            stageShutter.InitializeOpen();
+            stageShutter.PlayOpenSequence(welcomeText, null);
     }
 
     /// <summary>

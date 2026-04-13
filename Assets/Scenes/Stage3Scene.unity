@@ -1697,7 +1697,7 @@ MonoBehaviour:
   gameOverSceneName: GameOverScene
   stageShutter: {fileID: 1808172719}
   roundTextFormat: ROUND {0}
-  gameClearCloseText: STAGE CLEAR
+  gameClearCloseText: GAME CLEAR
   gameOverCloseText: GAME OVER
 --- !u!114 &1153834646
 MonoBehaviour:
